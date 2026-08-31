@@ -137,6 +137,7 @@ export const DOG_BREED_GROUPS: { label: string; breeds: string[] }[] = [
       '豆柴',
       'マルチーズ',
       'マンチェスターテリア',
+      'MIX（ミックス）',
       'ミディアムプードル',
       'ミニチュアシュナウザー',
       'ミニチュアダックスフンド',
