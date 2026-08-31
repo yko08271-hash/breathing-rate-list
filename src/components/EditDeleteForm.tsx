@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import DogBreedCombobox from './DogBreedCombobox';
+import { MIX_BREED } from '@/data/dogBreeds';
 import { GENDERS, type BreathingRecord } from '@/lib/types';
 
 type Step = 'edit' | 'success' | 'deleted';
@@ -48,6 +49,7 @@ export default function EditDeleteForm({ record, onDone }: Props) {
     const { error: updateError } = await supabase.from('breathing_records').update({
       dog_name: form.dog_name.trim(),
       dog_breed: form.dog_breed,
+      mix_detail: form.dog_breed === MIX_BREED ? (form.mix_detail?.trim() || null) : null,
       birth_date: form.birth_date,
       weight,
       gender: form.gender,
@@ -107,6 +109,16 @@ export default function EditDeleteForm({ record, onDone }: Props) {
       <div>
         <label className={labelClass}>犬種 *</label>
         <DogBreedCombobox value={form.dog_breed} onChange={(v) => setForm((prev) => ({ ...prev, dog_breed: v }))} required />
+        {form.dog_breed === MIX_BREED && (
+          <input
+            type="text"
+            name="mix_detail"
+            value={form.mix_detail ?? ''}
+            onChange={handleChange}
+            placeholder="何犬と何犬のミックスか（任意・不明な場合は空欄でOK）"
+            className={inputClass + ' mt-2'}
+          />
+        )}
       </div>
       <div>
         <label className={labelClass}>年齢（生年月日）*</label>

@@ -4,6 +4,7 @@ create table if not exists breathing_records (
   created_at timestamptz default now(),
   dog_name text not null,
   dog_breed text not null,
+  mix_detail text,
   birth_date date not null,
   weight numeric(5,2) not null check (weight > 0),
   gender text not null check (gender in ('オス', '去勢オス', 'メス', '避妊メス')),

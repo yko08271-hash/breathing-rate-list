@@ -7,6 +7,7 @@ export interface BreathingRecord {
   created_at: string;
   dog_name: string;
   dog_breed: string;
+  mix_detail: string | null; // 犬種がMIXの場合の「何犬と何犬か」（任意）
   birth_date: string; // YYYY-MM-DD
   weight: number; // kg
   gender: Gender;

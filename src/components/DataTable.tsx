@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { EnrichedRecord } from '@/lib/types';
+import { MIX_BREED } from '@/data/dogBreeds';
 import EditDeleteForm from './EditDeleteForm';
 
 interface Props {
@@ -56,7 +57,12 @@ export default function DataTable({ records, onMutate }: Props) {
               </td>
               <td className="px-3 py-2 border border-gray-200 whitespace-nowrap">{r.measured_date}</td>
               <td className="px-3 py-2 border border-gray-200 min-w-[120px]">{r.dog_name}</td>
-              <td className="px-3 py-2 border border-gray-200 min-w-[140px]">{r.dog_breed}</td>
+              <td className="px-3 py-2 border border-gray-200 min-w-[140px]">
+                {r.dog_breed}
+                {r.dog_breed === MIX_BREED && r.mix_detail && (
+                  <span className="text-xs text-gray-500">（{r.mix_detail}）</span>
+                )}
+              </td>
               <td className="px-3 py-2 border border-gray-200 whitespace-nowrap">{r.gender}</td>
               <td className="px-3 py-2 border border-gray-200 text-right">{r.age_at_measurement}歳</td>
               <td className="px-3 py-2 border border-gray-200 text-right">{r.weight}</td>

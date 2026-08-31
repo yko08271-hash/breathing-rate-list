@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import DogBreedCombobox from './DogBreedCombobox';
+import { MIX_BREED } from '@/data/dogBreeds';
 import { GENDERS, type Gender, type BreathingRecord } from '@/lib/types';
 
 const CACHE_KEY_RECORDED_BY = 'br_recorded_by';
@@ -28,6 +29,7 @@ const EMPTY_FORM = {
   recorded_by: '',
   dog_name: '',
   dog_breed: '',
+  mix_detail: '',
   birth_date: '',
   weight: '',
   gender: 'オス' as Gender,
@@ -46,7 +48,7 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
   const [form, setForm] = useState(EMPTY_FORM);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
-  const [knownDogs, setKnownDogs] = useState<Record<string, Pick<BreathingRecord, 'dog_breed' | 'birth_date' | 'weight' | 'gender'>>>({});
+  const [knownDogs, setKnownDogs] = useState<Record<string, Pick<BreathingRecord, 'dog_breed' | 'mix_detail' | 'birth_date' | 'weight' | 'gender'>>>({});
   const autofilledRef = useRef(false);
 
   useEffect(() => {
@@ -56,14 +58,14 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
     const supabase = createClient();
     supabase
       .from('breathing_records')
-      .select('dog_name, dog_breed, birth_date, weight, gender, measured_date')
+      .select('dog_name, dog_breed, mix_detail, birth_date, weight, gender, measured_date')
       .order('measured_date', { ascending: false })
       .then(({ data, error }) => {
         if (error || !data) return;
-        const map: Record<string, Pick<BreathingRecord, 'dog_breed' | 'birth_date' | 'weight' | 'gender'>> = {};
+        const map: Record<string, Pick<BreathingRecord, 'dog_breed' | 'mix_detail' | 'birth_date' | 'weight' | 'gender'>> = {};
         for (const r of data) {
           if (!(r.dog_name in map)) {
-            map[r.dog_name] = { dog_breed: r.dog_breed, birth_date: r.birth_date, weight: r.weight, gender: r.gender as Gender };
+            map[r.dog_name] = { dog_breed: r.dog_breed, mix_detail: r.mix_detail, birth_date: r.birth_date, weight: r.weight, gender: r.gender as Gender };
           }
         }
         setKnownDogs(map);
@@ -84,6 +86,7 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
     setForm((prev) => ({
       ...prev,
       dog_breed: known.dog_breed,
+      mix_detail: known.mix_detail ?? '',
       birth_date: known.birth_date,
       weight: String(known.weight),
       gender: known.gender,
@@ -114,6 +117,7 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
     const payload = {
       dog_name: form.dog_name.trim(),
       dog_breed: form.dog_breed,
+      mix_detail: form.dog_breed === MIX_BREED ? (form.mix_detail.trim() || null) : null,
       birth_date: form.birth_date,
       weight,
       gender: form.gender,
@@ -195,6 +199,16 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
       <div>
         <label className={labelClass}>犬種 *</label>
         <DogBreedCombobox value={form.dog_breed} onChange={(v) => setForm((prev) => ({ ...prev, dog_breed: v }))} required />
+        {form.dog_breed === MIX_BREED && (
+          <input
+            type="text"
+            name="mix_detail"
+            value={form.mix_detail}
+            onChange={handleChange}
+            placeholder="何犬と何犬のミックスか（任意・不明な場合は空欄でOK）"
+            className={inputClass + ' mt-2'}
+          />
+        )}
       </div>
 
       {/* 生年月日 */}

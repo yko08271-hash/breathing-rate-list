@@ -1,3 +1,6 @@
+/** 「何犬と何犬のミックスか」の任意入力欄を表示する対象の犬種名 */
+export const MIX_BREED = 'MIX（ミックス）';
+
 export const DOG_BREED_GROUPS: { label: string; breeds: string[] }[] = [
   {
     label: 'ア行',
