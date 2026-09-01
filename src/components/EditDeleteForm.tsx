@@ -157,20 +157,6 @@ export default function EditDeleteForm({ record, onDone }: Props) {
           <input type="checkbox" name="after_toilet" checked={form.after_toilet} onChange={handleCheckbox} className="accent-blue-600 w-4 h-4" />
           <span className="text-sm">平常時（※トイレ後等の落ち着いた状態）</span>
         </label>
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" name="is_other_condition" checked={form.is_other_condition} onChange={handleCheckbox} className="accent-blue-600 w-4 h-4" />
-          <span className="text-sm">その他</span>
-        </label>
-        {form.is_other_condition && (
-          <input
-            type="text"
-            name="other_condition_note"
-            value={form.other_condition_note ?? ''}
-            onChange={handleChange}
-            placeholder="内容を入力（任意）"
-            className={inputClass + ' mt-1'}
-          />
-        )}
       </div>
       <div>
         <label className={labelClass}>備考</label>

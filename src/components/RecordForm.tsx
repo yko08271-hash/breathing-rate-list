@@ -250,7 +250,7 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
         <input type="number" name="breathing_rate" value={form.breathing_rate} onChange={handleChange} required min="0" step="1" placeholder="例：22" className={inputClass} />
       </div>
 
-      {/* 睡眠中・平常時・その他 */}
+      {/* 睡眠中・平常時 */}
       <div className="bg-gray-50 rounded-lg p-4 space-y-2">
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" name="is_sleeping" checked={form.is_sleeping} onChange={handleCheckbox} className="accent-blue-600 w-4 h-4" />
@@ -260,20 +260,6 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
           <input type="checkbox" name="after_toilet" checked={form.after_toilet} onChange={handleCheckbox} className="accent-blue-600 w-4 h-4" />
           <span className="text-sm">平常時（※トイレ後等の落ち着いた状態）</span>
         </label>
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" name="is_other_condition" checked={form.is_other_condition} onChange={handleCheckbox} className="accent-blue-600 w-4 h-4" />
-          <span className="text-sm">その他</span>
-        </label>
-        {form.is_other_condition && (
-          <input
-            type="text"
-            name="other_condition_note"
-            value={form.other_condition_note}
-            onChange={handleChange}
-            placeholder="内容を入力（任意）"
-            className={inputClass + ' mt-1'}
-          />
-        )}
       </div>
 
       {/* 備考 */}
