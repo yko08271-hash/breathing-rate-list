@@ -130,14 +130,14 @@ export default function FilterPanel({ filters, onChange, onReset, availableBreed
         </div>
       </div>
 
-      {/* トイレ後 */}
+      {/* 平常時 */}
       <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">トイレ後</label>
+        <label className="block text-xs font-medium text-gray-600 mb-1">平常時</label>
         <div className="flex gap-3">
           {(['any', 'yes', 'no'] as const).map((v) => (
             <label key={v} className="flex items-center gap-1 text-sm cursor-pointer">
               <input type="radio" name="afterToilet" checked={filters.afterToilet === v} onChange={() => set('afterToilet', v)} className="accent-blue-600" />
-              {v === 'any' ? '指定なし' : v === 'yes' ? 'トイレ後のみ' : 'トイレ後以外'}
+              {v === 'any' ? '指定なし' : v === 'yes' ? '平常時のみ' : '平常時以外'}
             </label>
           ))}
         </div>

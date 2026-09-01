@@ -36,7 +36,7 @@ export default function DataTable({ records, onMutate }: Props) {
             <th className="px-2 py-2 border border-gray-200"></th>
             {[
               '測定日', '犬名', '犬種', '性別', '年齢', '体重(kg)',
-              '呼吸数(回/分)', '室温(℃)', '睡眠中', 'トイレ後', 'その他', '記録者', '備考',
+              '呼吸数(回/分)', '室温(℃)', '睡眠中', '平常時', 'その他', '記録者', '備考',
             ].map((h) => (
               <th key={h} className="px-3 py-2 text-left font-medium text-gray-600 border border-gray-200 whitespace-nowrap">
                 {h}

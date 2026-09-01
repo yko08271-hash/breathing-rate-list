@@ -155,7 +155,7 @@ export default function EditDeleteForm({ record, onDone }: Props) {
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" name="after_toilet" checked={form.after_toilet} onChange={handleCheckbox} className="accent-blue-600 w-4 h-4" />
-          <span className="text-sm">トイレ後に測定した</span>
+          <span className="text-sm">平常時（※トイレ後等の落ち着いた状態）</span>
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" name="is_other_condition" checked={form.is_other_condition} onChange={handleCheckbox} className="accent-blue-600 w-4 h-4" />
