@@ -214,7 +214,7 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
       {/* 生年月日 */}
       <div>
         <label className={labelClass}>年齢（生年月日）*</label>
-        <input type="date" name="birth_date" value={form.birth_date} onChange={handleChange} required max={today} className={inputClass} />
+        <input type="date" name="birth_date" value={form.birth_date} onChange={handleChange} required className={inputClass} />
         <p className="text-xs text-gray-400 mt-1">正確な日付が不明な場合はおおよその日付で構いません</p>
       </div>
 
@@ -235,7 +235,7 @@ export default function RecordForm({ onDone }: { onDone?: () => void } = {}) {
       {/* 測定日 */}
       <div>
         <label className={labelClass}>測定日 *</label>
-        <input type="date" value={measuredDate} onChange={(e) => setMeasuredDate(e.target.value)} required max={today} className={inputClass} />
+        <input type="date" value={measuredDate} onChange={(e) => setMeasuredDate(e.target.value)} required className={inputClass} />
       </div>
 
       {/* 温度（室温） */}
